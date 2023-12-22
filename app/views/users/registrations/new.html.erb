@@ -1,0 +1,42 @@
+<div class="form-modal">
+    <span class="close" onclick="window.location.href = '/'">&times;</span>
+    <h1 class="form-additional">Регистрация</h1>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="form-label" >
+        <%= f.label :name, "Имя" %>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      </div>
+
+      <div class="form-label" >
+        <%= f.label :email, "Email" %>
+        <%= f.email_field :email, autocomplete: "email" %>
+      </div>
+
+      <div class="form-label" >
+        <%= f.label :password, "Пароль" %>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="form-label" >
+        <%= f.label :password_confirmation, "Подтверждение пароля" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class= "form-additional">
+      <%= f.submit "Зарегистрироваться", class: "form-submit-button" %>
+      </div>
+      <div class= "form-additional">
+        Есть аккаунт? <%= link_to "Войти", new_user_session_path %>
+      </div>
+    
+      <% if resource.errors.any? %>
+        <div id="err">
+          <% resource.errors.full_messages.each do |message| %>
+            <p class="registration-error-message">
+              <%= message %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+</div>

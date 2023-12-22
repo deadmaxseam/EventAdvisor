@@ -1,0 +1,10 @@
+  <% unless @errors.nil? %>
+  </br><p></p>
+    <div id="err">
+      <ul>
+        <% @errors.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>

@@ -1,0 +1,31 @@
+<div class="form-modal"> 
+  <%= link_to "/events/#{@event.id}", class: "form-submit-button" do %>
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  <% end %>
+
+  <h1>Редактирование мероприятия</h1>
+  </br>Текущее название: <div id = "current_name"><%= @event.name %></div></br>
+  <%= turbo_frame_tag 'name' do %>
+    <%= link_to 'Изменить', "/pages/change_ev/#{@event.id}" , class:"form-submit-button"%>
+  <% end %> </br>
+
+  </br>Текущее описание: <div id = "current_description"><%= @event.description %></div></br>
+  <%= turbo_frame_tag 'description' do %>
+    <%= link_to 'Изменить', "/pages/change_ev/#{@event.id}", class:"form-submit-button" %>
+  <% end %></br>
+
+  </br>Текущая дата: <div id = "current_date"><%= @event.date %></div></br>
+  <%= turbo_frame_tag 'date' do %>
+    <%= link_to 'Изменить', "/pages/change_ev/#{@event.id}", class:"form-submit-button" %>
+  <% end %></br>
+
+  </br>Текущее местоположение: <div id = "current_location"><%= @event.location %></div></br>
+  <%= turbo_frame_tag 'location' do %>
+    <%= link_to 'Изменить', "/pages/change_ev/#{@event.id}", class:"form-submit-button" %>
+  <% end %>
+
+  <div id="errors">
+    <%= render partial: 'error_messages' %>
+  </div>
+</div>
+

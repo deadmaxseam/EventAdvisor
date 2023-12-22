@@ -1,0 +1,42 @@
+<div class="main">
+  <h1>Профиль пользователя</h1>
+  <p><strong>Имя:</strong> <%= @user.name %></p>
+  <p><strong>Email:</strong> <%= @user.email %></p>
+
+  <% if user_signed_in? %>
+    <% if current_user.id == @user.id %>
+    <div>
+      <%= button_to "Изменить профиль", "/pages/edit_profile/#{@user.id}", method: :get, class:"form-submit-button" %>
+      <%= button_to "Изменить пароль", "/pages/change_password/#{@user.id}", method: :get, class:"form-submit-button" %>
+    </div>
+    <% end %>
+  <% end %>
+
+  <% if @user.events.any? %>
+    <h2>Мероприятия пользователя</h2>
+
+    <table class="style-table">
+      <tr>
+        <th>Название мероприятия</th>
+        <th>Статус мероприятия</th>
+        <th>Роль пользователя</th>
+        <th>Дата</th>
+      </tr>
+      <% @user.events.includes(:roles).order(date: :desc).each do |event| %>
+        <tr>
+          <td ><a href="<%= event_path(event) %>", class="no-line"><%= event.name %></a></td>
+          <% if event.date < Time.now %>
+            <td style="color: red"><%= "Прошло" %></td>
+          <% else %>
+            <td style="color: green"><%= "Будет" %></td>
+          <% end %>
+          <td><%= event.roles.find_by(user_id: @user.id).role_name %></td>
+          <td><%= event.date %></td>
+        </tr>
+      <% end %>
+    </table>
+
+  <% else %>
+    <p>У данного пользователя пока нет мероприятий</p>
+  <% end %>
+</div>

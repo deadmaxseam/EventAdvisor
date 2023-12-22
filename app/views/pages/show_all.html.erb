@@ -1,0 +1,23 @@
+<div class="main">
+  <h1 class="form-additional">Будущие мероприятия</h1>
+  <div class="events-grid">
+    <% @events.select { |event| event.date >= Time.now }.each do |event| %>
+      <div class="event-item form-additional">
+        <a href="<%= event_path(event) %>", class="no-line"><p><%= event.name %></p></a>
+          <p><%= event.date.strftime("%d.%m.%Y") %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <h1 class="form-additional">Прошедшие мероприятия</h1>
+    <div class="events-grid">
+      <% @events.select { |event| event.date < Time.now }.each do |event| %>
+        <div class="event-item form-additional">
+          <a href="<%= event_path(event) %>", class="no-line"><p><%= event.name %></p></a>
+            <p><%= event.date.strftime("%d.%m.%Y") %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

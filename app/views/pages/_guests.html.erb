@@ -1,0 +1,63 @@
+<% if user_signed_in? %>
+    <!-- Отображение списка участников мероприятия -->
+    <%= link_to 'Скрыть гостей', "/pages/toogle_guests/show/#{@event.id}", class:"form-submit-button"  %>
+        <h2>Создатель мероприятия:</h2>
+        <% if @creator %>
+          <%= @creator.name %>
+        <% else %>
+          Создатель не указан
+        <% end %>
+
+        <% if @organizers.any? %>
+          <h2>Организаторы:</h2>
+          <ul class="organizer-list">
+            <% @organizers.each do |organizer| %>
+              <li>
+                <div>
+                  <% if current_user == @creator %>
+                    <%= link_to organizer.name, profile_path(organizer.id), method: :get, class:"no-line" %></br>
+                    <%= button_to "Разжаловать", remove_organizer_event_path(@event.id, organizer.id), method: :delete, data: { turbo: "false" } , class: "form-submit-button"%></br>
+                  <% else %>
+                    <%= organizer.name %>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <% if !@organizers.any? && @guests.pluck(:id).include?(current_user.id) %>
+            <h2>Организаторы пока не назначены, хотите помочь?</h2>
+          <% else %>
+            <h2>Организаторы пока не назначены</h2>
+          <% end %>
+        <% end %>
+
+        <% if current_user && current_user.id != @creator.id && @event.date > Time.now %>
+          <% if @guests.pluck(:id).include?(current_user.id) && !@organizers.pluck(:id).include?(current_user.id)  %>
+            <%= button_to "Хочу помогать", add_organizer_event_path(@event.id, current_user.id), method: :post, data: { turbo: "false" }, class: "form-submit-button" %>
+          <% elsif @organizers.pluck(:id).include?(current_user.id)  %>
+            <%= button_to "Не смогу помогать", remove_organizer_event_path(@event.id, current_user.id), method: :delete, data: { turbo: "false" } , class: "form-submit-button"%>
+          <% end %>
+        <% end %>
+
+        <% if @guests.any? %>
+          <h2>Гости:</h2>
+          <ul>
+            <% @guests.each do |guest| %>
+              <li><%= guest.name %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <h2>Гостей пока нет, хотите стать первым?</h2>
+        <% end %>
+    
+      <% if current_user.id != @creator.id && !@organizers.pluck(:id).include?(current_user.id) && @event.date > Time.now %>
+        <% if !@guests.pluck(:id).include?(current_user.id) %>
+          <%= button_to "Хочу участвовать", add_guest_event_path(@event.id,current_user.id), method: :post, data: { turbo: "false" }, class: "form-submit-button"%>
+        <% else %>
+          <%= button_to "Не хочу участвовать", remove_guest_event_path(@event.id,current_user.id), method: :delete, data: { turbo: "false" }, class: "form-submit-button"%>
+        <% end %>
+      <% end %>
+<% else %>
+  <h3>Для получения информации об участниках и организаторах войдите в учетную запись</h3>
+<% end %>

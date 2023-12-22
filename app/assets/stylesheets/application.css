@@ -1,0 +1,291 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require font-awesome
+ *= require_tree .
+ *= require_self
+ */
+
+
+@import "font-awesome";
+
+
+/* ШРИФТЫ */
+ @font-face {
+  font-family: "Forum";
+  src: url('/assets/Forum.ttf');
+}
+
+@font-face {
+  font-family: "Cuprum-Bold";
+  src: url('/assets/Cuprum-Bold.ttf');
+}
+
+@font-face {
+  font-family: "Cuprum-Italic";
+  src: url('/assets/Cuprum-Italic.ttf');
+}
+
+@font-face {
+  font-family: "Cuprum-BoldItalic";
+  src: url('/assets/Cuprum-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: "Cuprum-Regular";
+  src: url('/assets/Cuprum-Regular.ttf');
+}
+
+body{
+  font-family: Cuprum-Regular;
+  zoom: 125%;
+}
+
+
+#err {
+  color: #fff;
+  background-color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+}
+
+
+
+.no-line{
+  text-decoration: none;
+}
+
+
+
+div.main {
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.event-item {
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-item:hover {
+  background: linear-gradient(20deg, #f2f2f2, #ff8c42);
+  color: white;
+}
+
+
+
+.style-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.style-table th, .style-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.style-table th {
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.style-table td {
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1); /* тень только снизу */
+}
+
+
+form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  width: auto;
+  max-width: 250px;
+}
+
+form select:active,
+form select:focus {
+  background-color: #f4f4f4;
+}
+
+form select option:checked{
+  background-color: #ff8c00; /* меняйте на нужный цвет */
+  color: white;
+}
+
+
+
+
+
+/* INDEX */
+.welcome-section {
+  text-align: center;
+  padding: 100px 0;
+  background: linear-gradient(20deg, #f2f2f2, #ff8c42);
+  color: white; /* изменение цвета текста на белый */
+}
+
+.feature-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px 0;
+  background-color: #fff;
+}
+
+.feature-block {
+  width: 30%;
+  margin: 10px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+/* FORM */
+.form-modal {
+  position: fixed;
+  width: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 60px;
+  z-index: 9999;
+}
+
+.form-label{
+  font-family: Cuprum-Bold;
+  font-size: 16px;
+}
+
+.form-text-area{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: 'Cuprum-Regular', sans-serif;
+  color: #442b2b;
+  resize: vertical; 
+}
+
+form input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: 'Cuprum-Regular', sans-serif;
+  color: #442b2b;
+  box-sizing: border-box; /* чтобы учесть отступы и границы в общей ширине */
+  margin-bottom: 10px; /* добавить небольшой отступ между полями */
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"]                 
+ {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: Cuprum-Regular;
+  color:#442b2b;
+}
+
+.form-additional{
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close:hover {
+  font-size:24px;
+  color:#ff5500;
+}
+
+
+
+
+/* HEADER */
+header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* увеличиваем отступы */
+  display: flex;
+  justify-content: flex-end;
+}
+
+header a {
+  text-decoration: none;
+  padding: 20px 30px; /* увеличиваем отступы кнопок */
+  font-family: 'Cuprum-Bold', sans-serif;
+  color: #000000;
+  border-radius: 25px; /* добавляем закругления */
+  font-size: 18px;
+}
+
+header a:hover {
+  background-color: #ff8c00;
+  color: #ffffff;
+}
+
+
+.form-submit-button {
+  width: 300 px;
+  background-color: #ff8c00;
+  border-color: #ff8c00;
+  color: #fff;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-family: Cuprum-Bold;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.form-submit-button:hover {
+  background-color: #ffbd2a; /* новый цвет фона при наведении */
+  color: #ffffff; /* новый цвет текста при наведении */
+  border-color: #ffbd2a; /* новый цвет границы при наведении */
+}
+
+

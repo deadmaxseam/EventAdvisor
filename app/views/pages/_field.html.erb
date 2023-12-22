@@ -1,0 +1,15 @@
+<%= turbo_frame_tag 'name' do %>
+    <%= form_with url: "/pages/update/name/#{@user_id}", method: :put do |form| %>
+        <%= form.text_field :name, placeholder: "Имя"%><strong>
+        <%= form.submit "Сохранить", class: "form-submit-button"%>
+    <% end %>
+<% end %>
+
+
+<%= turbo_frame_tag 'email' do %>
+    <%= form_with url: "/pages/update/email/#{@user_id}", method: :put do |form| %>
+        <%= form.text_field :email, placeholder: "Email" %>
+        <%= form.submit "Сохранить" , class: "form-submit-button"%>
+    <% end %>
+<% end %>
+ 

@@ -1,0 +1,46 @@
+<%= link_to 'Скрыть активности', "/pages/toogle_activities/show/#{@event}", class:"form-submit-button" %>
+<h2>Список активностей:</h2> 
+
+<% @activities = @activities.order(start_time: :asc) %>
+
+<% if current_user == @creator %>
+  <table class="style-table">
+    <tr>
+      <th>Название</th>
+      <th>Время начала</th>
+      <th>Время окончания</th>
+      <th></th>
+    </tr>
+    <% @activities.each do |activity| %>
+      <tr>
+        <td><%= activity.name %></td>
+        <td><%= activity.start_time.strftime("%d %b %Y, %H:%M") %></td>
+        <td><%= activity.end_time.strftime("%d %b %Y, %H:%M") %></td>
+        <td><%= button_to "Удалить", remove_activity_path(@event, activity.id), method: :delete, data: { turbo: "false" }, class:"form-submit-button"%></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <table class="style-table">
+    <tr>
+      <th>Название</th>
+      <th>Время начала</th>
+      <th>Время окончания</th>
+    </tr>
+    <% @activities.each do |activity| %>
+      <tr>
+        <td><%= activity.name %></td>
+        <td><%= activity.start_time.strftime("%d %b %Y, %H:%M") %></td>
+        <td><%= activity.end_time.strftime("%d %b %Y, %H:%M") %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+
+<% if current_user == @creator && @data >= Time.now %>
+  <h2>Создание новой активности</h2>
+  <div class="main">
+  <%= render 'activity_form' %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<div class= "main">
+  <h1><%= @event.name %></h1>
+  <p><strong>Описание:</strong> <%= @event.description %></p>
+  <p><strong>Дата:</strong> <%= @event.date %></p>
+  <p><strong>Статус: </strong><%= @ev_status %></p>
+  <p><strong>Место:</strong> <%= @event.location %></p>
+
+
+
+    </br><div id="activity">
+      <%= link_to 'Показать активности', "/pages/toogle_activities/no_show/#{@event.id}", class:"form-submit-button" %> 
+    </div></br>
+
+    <% if user_signed_in? %>
+      <% if @organizers.include?(current_user) || @creator == current_user %>
+        </br><div id="task"=>
+          <%= link_to 'Показать задачи', "/pages/toogle_tasks/no_show/#{@event.id}" , class:"form-submit-button" %> 
+        </div>
+      <% end %>
+    <% end %></br>
+
+    </br><div id="guests">
+      <%= link_to 'Показать гостей', "/pages/toogle_guests/no_show/#{@event.id}", class:"form-submit-button"%> 
+    </div></br>
+
+    </br><% if user_signed_in? %>
+      <% if current_user == @creator && @event.date >= Time.now %>
+        <%= link_to 'Изменить детали мероприятия', "/pages/edit_event/#{@event.id}", method: :get , class:"form-submit-button"%>
+      <% end %>
+    <% end %></br>
+
+    </br>
+    <% if current_user.id == @creator.id %>
+      <%= button_to "Удалить мероприятие", "/events/#{@event.id}", method: :delete, data: { turbo: "false" } , class:"form-submit-button"%>
+    <% end %>
+</div>

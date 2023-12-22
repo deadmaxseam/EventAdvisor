@@ -1,0 +1,22 @@
+<div class="form-modal">
+  <%= link_to "/pages/profile/#{@user.id}", class: "form-submit-button" do %>
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  <% end %>
+
+  <h1 class="form-additional">Изменение профиля</h1>
+  Текущее имя: <div id = "current_name"><%= @user.name %></div></br>
+  <%= turbo_frame_tag 'name' do %>
+      <%= link_to 'Изменить', "/pages/change/#{@user.id}" , class: "form-submit-button"%>
+  <% end %> </br><p></p>
+
+  Текущая почта: <div id = "current_email"><%= @user.email %></div></br>
+  <%= turbo_frame_tag 'email' do %>
+      <%= link_to 'Изменить', "/pages/change/#{@user.id}" , class: "form-submit-button"%>
+  <% end %>
+   </br> 
+
+
+  <div id="errors">
+    <%= render partial: 'error_messages' %>
+  </div>
+</div>

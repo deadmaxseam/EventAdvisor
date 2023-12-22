@@ -1,0 +1,21 @@
+<%= form_with url: "/events/#{@event}/new_activity", method: :post do |f| %>
+  <div>
+    <%= f.label :name, "Название активности:" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-additional">
+    <%= f.label :start_time, "Время начала:" %>
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="form-additional">
+    <%= f.label :end_time, "Время конца:" %>
+    <%= f.datetime_select :end_time %>
+  </div>
+  <div class = "form-additional">
+    <%= f.submit "Создать активность" , class: "form-submit-button" %>
+  </div>
+<% end %>
+
+<div id="errors">
+  <%= render partial: 'error_messages' %>
+</div>

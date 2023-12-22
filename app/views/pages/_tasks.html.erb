@@ -1,0 +1,47 @@
+<% if @organizers.include?(current_user) || @creator == current_user %>
+  <%= link_to 'Скрыть задачи', "/pages/toogle_tasks/show/#{@event.id}", class:"form-submit-button"  %>
+
+  <h2>Список задач:</h2>
+
+  <% @tasks = @event.tasks.order(created_at: :desc) %>
+
+<table class="style-table">
+  <tr>
+    <th>Название</th>
+    <th>Описание</th>
+    <th>Ответственный</th>
+    <th>Статус</th>
+    <th></th>
+  </tr>
+  <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.description %></td>
+      <td><%= task.responsible.name %></td>
+      <td>
+        <% if @creator == current_user || current_user == task.responsible %>
+          <%= form_with url: "/task/update/#{task.id}", method: :put do |f| %>
+            <%= f.select :status, options_for_select(['Новая', 'В работе', 'Завершена'], selected: task.status), class:"form select" %>
+            <%= f.submit 'Сохранить', class:"form-submit-button" %>
+          <% end %>
+        <% else %>
+          <%= task.status %>
+        <% end %>
+      </td>
+      <td>
+        <% if @creator == current_user %>
+          <%= button_to "Удалить", remove_task_path(@event, task.id), method: :delete, data: { turbo: "false" }, class:"form-submit-button" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+
+  <% if @creator == current_user && @data >= Time.now %>
+    <h2>Создание новой задачи:</h2>
+    <div class="main">
+    <%= render 'task_form' %>
+    </div>
+  <% end %>
+<% end %>

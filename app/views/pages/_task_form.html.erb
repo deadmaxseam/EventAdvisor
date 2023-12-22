@@ -1,0 +1,24 @@
+<%= form_with url: "/events/#{@event.id}/new_task", method: :post do |f| %>
+  <div class="field">
+    <%= f.label :name, "Название:"  %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description, "Описание:" %>
+    <%= f.text_area :description, class:"form-text-area" %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :status, value: 'Новая' %>
+  </div>
+  <div class="field form-additional">
+    <%= f.label :responsible , "Ответственный:" %>
+    <%= f.collection_select :responsible_id, @organizers.to_a.concat([@creator]), :id, :name, prompt: true %>
+  </div>
+  <div class="actions form-additional">
+    <%= f.submit "Создать задачу" , class:"form-submit-button "%>
+  </div>
+<% end %>
+
+<div id="errors">
+  <%= render partial: 'error_messages' %>
+</div>

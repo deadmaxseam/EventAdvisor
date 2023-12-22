@@ -1,0 +1,35 @@
+<div class="form-modal"> 
+  <h1>Создать новое мероприятие</h1>
+
+  <%= form_for @event, url: post_new_event_path do |f| %>
+    <div>
+      <%= f.label :name, "Название" %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+      <%= f.label :description, "Описание" %>
+      <%= f.text_area :description, class:"form-text-area" %>
+    </div>
+    
+    <div>
+      <%= f.label :date, "Дата" %> 
+      <%= f.date_field :date %>  
+    </div>
+
+    <div>
+      <%= f.label :location, "Местоположение" %>
+      <%= f.text_field :location %>
+    </div>
+
+    <div class = "form-additional">
+      <%= f.submit "Создать", class: "form-submit-button" %>
+    </div>
+  <% end %>
+
+
+  <div id="errors">
+    <%= render partial: 'error_messages' %>
+  </div>
+</div>
+

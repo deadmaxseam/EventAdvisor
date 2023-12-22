@@ -1,0 +1,6 @@
+<%= turbo_stream.update 'name' do %>
+    <%= link_to 'Изменить', "/pages/change_ev/#{@event.id}", class:"form-submit-button" %>
+<% end %>
+<%= turbo_stream.update 'current_name' do %>
+    <%= @event.name %>
+<% end %>

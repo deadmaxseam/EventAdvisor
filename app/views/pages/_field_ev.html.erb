@@ -1,0 +1,28 @@
+<%= turbo_frame_tag 'name' do %>
+    <%= form_with url: "/pages/update_ev/name/#{@event_id}", method: :put do |form| %>
+        <%= form.text_field :name, placeholder: "Название" %>
+        <%= form.submit "Сохранить", class:"form-submit-button" %>
+    <% end %>
+<% end %>
+
+<%= turbo_frame_tag 'description' do %>
+    <%= form_with url: "/pages/update_ev/description/#{@event_id}", method: :put do |form| %>
+        <%= form.text_area :description, placeholder: "Описание", class:"form-text-area" %>
+        <%= form.submit "Сохранить", class:"form-submit-button" %>
+    <% end %>
+<% end %>
+
+<%= turbo_frame_tag 'date' do %>
+    <%= form_with url: "/pages/update_ev/date/#{@event_id}", method: :put do |form| %>
+        <%= form.date_field :date, placeholder: "Дата" %>
+        <%= form.submit "Сохранить", class:"form-submit-button" %>
+    <% end %>
+<% end %>
+
+<%= turbo_frame_tag 'location' do %>
+    <%= form_with url: "/pages/update_ev/location/#{@event_id}", method: :put do |form| %>
+        <%= form.text_field :location, placeholder: "Местоположение" %>
+        <%= form.submit "Сохранить", class:"form-submit-button" %>
+    <% end %>
+<% end %>
+

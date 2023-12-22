@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EvA</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+  <header style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <%= link_to(root_path) do %>
+        <%= image_tag("logo.png", alt: "Логотип", width: "30", height: "30")  %>
+      <% end %>
+    </div>
+    <div>
+      <% if user_signed_in? %>
+        <a href="<%= new_event_path %>">Создать мероприятие</a>
+        <a href="<%= show_all_path %>" >Все мероприятия</a>
+        <a href="<%= my_tasks_path %>" >Мои задачи</a>
+        <a href="<%= profile_path(current_user.id) %>" >Мой профиль</a>
+        <a href="<%= destroy_user_session_path %>" data-method="delete" >Выйти</a>
+      <% else %>
+        <a href="<%= new_user_registration_path %>" >Регистрация</a>
+        <a href="<%= new_user_session_path %>" >Вход</a>
+      <% end %>
+      </div>
+  </header>
+
+
+  <%= yield %>
+  
+</body>
+</html>
